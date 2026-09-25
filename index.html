@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0b1020" />
+  <title>Academic Command Center</title>
+  <meta name="description" content="Personal B.Tech AI & Data Science academic tracker." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">AC</div>
+        <div>
+          <div class="brand-name">Academic Command</div>
+          <div class="brand-sub">B.Tech AI & Data Science</div>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <button class="nav-item active" data-view="overview"><span>⌂</span> Overview</button>
+        <button class="nav-item" data-view="curriculum"><span>▦</span> Curriculum</button>
+        <button class="nav-item" data-view="revision"><span>↻</span> Revision Hub</button>
+        <button class="nav-item" data-view="settings"><span>⚙</span> Data & Settings</button>
+      </nav>
+
+      <div class="sidebar-foot">
+        <div class="mini-card">
+          <div class="mini-label">CURRENT PLAN</div>
+          <div class="mini-title">1st Year · Sem I</div>
+          <div class="mini-copy">Your progress is saved in this browser.</div>
+        </div>
+        <div class="github-note">Designed for GitHub Pages</div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <div class="eyebrow">PERSONAL ACADEMIC TRACKER</div>
+          <h1 id="pageTitle">Overview</h1>
+        </div>
+        <div class="top-actions">
+          <button class="ghost-btn" id="exportBtn">Export data</button>
+          <label class="primary-btn import-btn">Import data<input id="importInput" type="file" accept=".json" hidden></label>
+        </div>
+      </header>
+
+      <section id="overviewView" class="view active">
+        <div class="hero">
+          <div>
+            <span class="pill">2025–26 · First Year</span>
+            <h2>Build your semester, then master it.</h2>
+            <p>Track notes, chapters, revision, exam weightage and study status without losing the bigger picture.</p>
+          </div>
+          <button class="primary-btn" id="openCurriculum">Open curriculum →</button>
+        </div>
+
+        <div class="year-grid" id="yearGrid"></div>
+
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">CURRENT SEMESTER</div>
+            <h3 id="overviewSemTitle">Semester I</h3>
+          </div>
+          <div class="segmented" id="overviewSemTabs">
+            <button class="seg active" data-sem="1">Sem I</button>
+            <button class="seg" data-sem="2">Sem II</button>
+          </div>
+        </div>
+
+        <div class="stats-grid" id="statsGrid"></div>
+
+        <div class="content-grid">
+          <section class="panel">
+            <div class="panel-head">
+              <div>
+                <div class="eyebrow">SUBJECTS</div>
+                <h3>Semester snapshot</h3>
+              </div>
+              <button class="text-btn" id="overviewSeeAll">View all →</button>
+            </div>
+            <div id="overviewSubjects" class="subject-list"></div>
+          </section>
+
+          <section class="panel">
+            <div class="panel-head">
+              <div>
+                <div class="eyebrow">NEXT ACTIONS</div>
+                <h3>What needs attention</h3>
+              </div>
+            </div>
+            <div id="attentionList" class="attention-list"></div>
+          </section>
+        </div>
+      </section>
+
+      <section id="curriculumView" class="view">
+        <div class="control-row">
+          <div class="year-switcher" id="yearSwitcher"></div>
+          <div class="segmented" id="semTabs">
+            <button class="seg active" data-sem="1">Semester I</button>
+            <button class="seg" data-sem="2">Semester II</button>
+          </div>
+        </div>
+
+        <div class="curriculum-head">
+          <div>
+            <div class="eyebrow" id="curriculumEyebrow">FIRST YEAR · SEMESTER I</div>
+            <h2 id="curriculumTitle">Semester I</h2>
+            <p id="curriculumDescription">Your syllabus structure from the university scheme.</p>
+          </div>
+          <div class="curriculum-actions">
+            <button class="ghost-btn" id="addSubjectBtn">+ Add subject</button>
+          </div>
+        </div>
+
+        <div class="progress-banner">
+          <div>
+            <span class="eyebrow">SEMESTER PROGRESS</span>
+            <div class="big-progress"><strong id="semesterProgress">0%</strong><span>chapter completion</span></div>
+          </div>
+          <div class="progress-track large"><span id="semesterProgressBar"></span></div>
+          <div class="progress-meta" id="semesterMeta">0 / 0 chapters completed</div>
+        </div>
+
+        <div class="subject-grid" id="subjectGrid"></div>
+      </section>
+
+      <section id="revisionView" class="view">
+        <div class="page-intro">
+          <div class="eyebrow">REVISION HUB</div>
+          <h2>Keep weak and unfinished topics in rotation.</h2>
+          <p>Anything marked incomplete or not recently revised appears here automatically.</p>
+        </div>
+        <div id="revisionGrid" class="revision-grid"></div>
+      </section>
+
+      <section id="settingsView" class="view">
+        <div class="page-intro">
+          <div class="eyebrow">DATA & SETTINGS</div>
+          <h2>Your tracker stays yours.</h2>
+          <p>This version stores changes locally in your browser. Use export/import to keep backups.</p>
+        </div>
+        <div class="settings-grid">
+          <section class="panel">
+            <div class="panel-head"><h3>Data</h3></div>
+            <div class="setting-row"><div><strong>Local storage</strong><span>Automatically saved after every change.</span></div><span class="status-dot">Active</span></div>
+            <div class="setting-row"><div><strong>Export backup</strong><span>Download a JSON snapshot of your tracker.</span></div><button class="ghost-btn" id="settingsExport">Export</button></div>
+            <div class="setting-row"><div><strong>Reset tracker</strong><span>Restore the original first-year syllabus.</span></div><button class="danger-btn" id="resetBtn">Reset</button></div>
+          </section>
+          <section class="panel">
+            <div class="panel-head"><h3>What is preloaded</h3></div>
+            <ul class="feature-list">
+              <li>First Year · Semester I and II</li>
+              <li>Exact subject codes, names and credits from your supplied scheme</li>
+              <li>Editable subjects and chapters</li>
+              <li>Notes status, revision status and chapter weightage</li>
+              <li>Revision queue and semester progress</li>
+              <li>Four-year structure ready for future syllabus entry</li>
+            </ul>
+          </section>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="subjectModal" class="modal hidden">
+    <div class="modal-backdrop" data-close="modal"></div>
+    <div class="modal-card">
+      <div class="modal-head">
+        <div>
+          <div class="eyebrow" id="modalEyebrow">SUBJECT</div>
+          <h2 id="modalTitle">Subject</h2>
+          <p id="modalSub">Manage chapters and study status.</p>
+        </div>
+        <button class="icon-btn" data-close="modal">×</button>
+      </div>
+      <div class="modal-stats" id="modalStats"></div>
+      <div class="chapter-list" id="chapterList"></div>
+      <button class="add-chapter-btn" id="addChapterBtn">+ Add chapter</button>
+    </div>
+  </div>
+
+  <div id="subjectFormModal" class="modal hidden">
+    <div class="modal-backdrop" data-close="subject-form"></div>
+    <form class="modal-card form-card" id="subjectForm">
+      <div class="modal-head">
+        <div><div class="eyebrow">NEW SUBJECT</div><h2>Add subject</h2><p>Add a subject to the selected semester.</p></div>
+        <button type="button" class="icon-btn" data-close="subject-form">×</button>
+      </div>
+      <div class="form-grid">
+        <label>Course code<input id="newCode" required placeholder="e.g. AI25105"></label>
+        <label>Credits<input id="newCredits" type="number" min="0" max="10" value="3"></label>
+        <label class="full">Course name<input id="newName" required placeholder="e.g. Data Science Foundations"></label>
+      </div>
+      <button class="primary-btn full-btn" type="submit">Create subject</button>
+    </form>
+  </div>
+
+  <div id="chapterFormModal" class="modal hidden">
+    <div class="modal-backdrop" data-close="chapter-form"></div>
+    <form class="modal-card form-card" id="chapterForm">
+      <div class="modal-head">
+        <div><div class="eyebrow">NEW CHAPTER</div><h2>Add chapter</h2><p>Add the syllabus unit and your tracking fields.</p></div>
+        <button type="button" class="icon-btn" data-close="chapter-form">×</button>
+      </div>
+      <div class="form-grid">
+        <label class="full">Chapter / Unit name<input id="chapterName" required placeholder="e.g. Unit 1 — Functions"></label>
+        <label>Weightage %<input id="chapterWeight" type="number" min="0" max="100" value="0"></label>
+        <label>Priority
+          <select id="chapterPriority"><option>Normal</option><option>High</option><option>Critical</option></select>
+        </label>
+      </div>
+      <button class="primary-btn full-btn" type="submit">Add chapter</button>
+    </form>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
